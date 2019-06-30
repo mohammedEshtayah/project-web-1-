@@ -1,0 +1,58 @@
+{
+  "name": "proj1",
+  "version": "1.0.0",
+  "description": "test",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "build": "echo 'build script executed'",
+    "tsc": "tsc",
+    "debug": "nodemon --inspect <path_to_the_file_that_starts_your_application>",
+    "dev": "ts-node-dev --respawn --transpileOnly ./app/app.ts",
+    "prod": "tsc && node ./build/app.js"
+  },
+  "dependencies": {
+    "@fenderdigital/react-logo": "^1.1.0",
+    "@material-ui/core": "^3.9.3",
+    "@version/react-router-v3": "^1.0.0",
+    "axios": "^0.18.0",
+    "body-parser": "^1.19.0",
+    "bootstrap": "^4.3.1",
+    "cheeseburger-menu": "0.0.13",
+    "cors": "^2.8.5",
+    "debug": "^4.1.1",
+    "express": "^4.16.4",
+    "firebase": "^5.11.1",
+    "firebase-admin": "^7.3.0",
+    "history": "^4.9.0",
+    "leaflet": "^1.5.1",
+    "local-storage": "^2.0.0",
+    "mapbox-gl": "^1.0.0",
+    "mdbreact": "^4.14.0",
+    "node-sass": "^4.12.0",
+    "pug": "^2.0.3",
+    "react": "^16.8.6",
+    "react-bootstrap": "^1.0.0-beta.9",
+    "react-burger-menu": "^2.6.10",
+    "react-dom": "^16.8.6",
+    "react-fixed-sidebar": "^1.1.3",
+    "react-hamburger-menu": "^1.1.1",
+    "react-leaflet": "^2.3.0",
+    "react-login-signup-form": "^1.0.7",
+    "react-mapbox-gl": "^4.4.0",
+    "react-mapbox-wrapper": "^2.4.0",
+    "react-router": "^3.2.1",
+    "react-router-dom": "^5.0.0",
+    "socket.io": "^2.2.0",
+    "util": "^0.12.0"
+  },
+  "keywords": [
+    "test"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "tap": "^13.1.8"
+  }
+}
