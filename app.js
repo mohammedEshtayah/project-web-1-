@@ -114,33 +114,84 @@ var amb = db.ref("ambulance/");
  
     
 });
+
 io.on('connection', socket => { 
-  //ambulance
- // var amb = db.ref("hospital/Arabi/patient/2019-05-08");
- var amb = db.ref("ambulance");
+  var amb = db.ref("hospital/Arabi/patient/2019-05-08");
+  var amb = db.ref("ambulance");
   
   
   socket.on('Hospital', function(hospital){
-	 	console.log("Hospital --> " + hospital);
-	  
-  
-  amb.on("value", function(snapshot) {
-    var ar=[]; 
+    
+    amb.on("value", function(snapshot) {
+    var amb_Hospital=[];
+
     snapshot.forEach((function(child) {
       console.log(child.val().latlng)
-     
-     if(child.val().destination==hospital)
-       ar.push(child.val())
-     
+      if(child.val().destination==hospital)
+      amb_Hospital.push(child.val()) 
     }))
-    
-//ar.push(snapshot.val().saa.val)
-socket.emit('ambulances', ar)
-  } );
-  
-}); 
- })
+    socket.emit('ambulances', amb_Hospital)
+    });
 
+  });
+
+  socket.on('amb_Hilal', function(hospital){
+    
+    var amb = db.ref("ambulance");
+    amb.on("value", function(snapshot) { 
+    var amb_Hilal=[];
+
+    snapshot.forEach((function(child) {
+      if(child.val().stateIn==true)
+      amb_Hilal.push(child.val())
+      console.log(child.val())
+    }))
+ 
+    socket.emit('amb_Hilal', amb_Hilal)
+  });
+
+
+  }); 
+
+
+})
+
+
+app.get('/History-patient-hospital',function(req,res, next){
+  var History_patient =[];
+  
+  async.series([
+   function(callback){ 
+
+      var amb = db.ref("hospital/Arabi/patient");
+      amb.on("value", function(snapshot) {
+        
+      snapshot.forEach(function(child){
+        var Datas_patient =[];
+        Object.keys(snapshot.child(child.key).val()).map(key=>{
+          Datas_patient.push({'name':key,'datas':snapshot.child(child.key).child(key).val()})
+      
+        })
+       
+        History_patient.push({'history':child.key,'patient':Datas_patient} )
+        console.log(History_patient)
+         //console.log(Array.isArray(Object.keys(snapshot.child(child.key).val()))  )
+       // console.log(snapshot.child(child.key).child('ali').child('age').val())
+
+       })
+
+      callback();
+      });
+     
+   },  function(callback){
+
+    //console.log(History_patient);
+    if(History_patient)
+    res.json(History_patient );
+ }])
+
+});
+/*
  app.get('/History-patient-hospital',function(req,res, next){
   var History_patient =[];
   async.series([
@@ -166,32 +217,7 @@ callback();
  }])
 
 });
-
-app.get('/History-patient-hospital',function(req,res, next){
-  var History_patient =[];
-  async.series([
-   function(callback){ 
-var amb = db.ref("hospital/Arabi/patient");
- amb.on("value", function(snapshot) {
- 
-  snapshot.forEach(function(child){
-    History_patient.push({'history':child.key})
-    
-     }
- 
-  )
-callback();
- } );
-     
-   },  function(callback){
-  //    console.log(History_patient);
-   if(History_patient)
-     console.log(History_patient)
-    
-  res.json(History_patient);
- }])
-
-});
+*/
 //يستمع للاضافه 
 /*
  var amb = db.ref("ambulance/");
