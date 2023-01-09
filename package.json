@@ -24,7 +24,7 @@
     "debug": "^4.1.1",
     "express": "^4.16.4",
     "firebase": "^5.11.1",
-    "firebase-admin": "^7.3.0",
+    "firebase-admin": "^11.4.1",
     "history": "^4.9.0",
     "leaflet": "^1.5.1",
     "local-storage": "^2.0.0",
